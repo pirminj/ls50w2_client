@@ -167,7 +167,6 @@ class KefClient {
   }
 
   Future<bool> nextTrack() => _playerControl(PlayerControl.next);
-  Future<bool> togglePlayPause() =>
-      _playerControl(PlayerControl.togglePlayPause);
+  Future<bool> togglePlayPause() => _playerControl(PlayerControl.pause);
   Future<bool> previousTrack() => _playerControl(PlayerControl.previous);
 }

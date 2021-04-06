@@ -3,4 +3,4 @@ library kef_ls50w2_client;
 
 export 'src/client.dart';
 export 'src/enums.dart' show SpeakerSource, SpeakerStatus;
-export 'src/models/player_data.dart' show PlayerState;
+export 'src/models/player_data.dart';

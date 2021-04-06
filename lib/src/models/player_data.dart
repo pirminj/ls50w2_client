@@ -5,6 +5,7 @@ part 'player_data.g.dart';
 enum PlayerState {
   playing,
   paused,
+  transitioning,
   stopped,
 }
 
