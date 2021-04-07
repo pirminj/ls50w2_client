@@ -1,9 +1,20 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart';
 
 import 'enums.dart';
-import 'models/player_data.dart';
+
+/// Paths to be used as parameters for the `/api/setData` and `/api/getData`
+/// URI
+class ApiPath {
+  static String speakerStatus = 'settings:/kef/host/speakerStatus';
+  static String speakerSource = 'settings:/kef/play/physicalSource';
+  static String volume = 'player:volume';
+  static String playerData = 'player:player/data';
+  static String playTime = 'player:player/data/playTime';
+}
 
 /// A client for the KEF LS50 Wireless 2
 ///
@@ -14,159 +25,141 @@ class KefClient {
         _getDataUri = Uri.parse('http://$host/api/getData'),
         _setDataUri = Uri.parse('http://$host/api/setData');
 
+  /// The IP address in the local network
+  final String host;
   final Client _client;
 
   final Uri _getDataUri;
   final Uri _setDataUri;
 
-  /// The IP address in the local network
-  final String host;
+  /// Turn the speaker on. Shortcut for [setStatus]
+  Future<void> turnOn() => setStatus(SpeakerStatus.powerOn);
+
+  /// Turn the speaker off. Shortcut for [setStatus]
+  Future<void> turnOff() => setStatus(SpeakerStatus.standby);
+
+  /// Skip to next track. Shortcut for [controlPlayer]
+  Future<void> nextTrack() => controlPlayer(PlayerControl.next);
+
+  /// Toggle play/pause. Shortcut for [controlPlayer]
+  Future<void> togglePlayPause() => controlPlayer(PlayerControl.pause);
+
+  /// Play the previous track. Shortcut for [controlPlayer]
+  Future<void> previousTrack() => controlPlayer(PlayerControl.previous);
+
+  /// Fetch the raw json from the [ApiPath.playerData] path
+  Future<Map<String, dynamic>> getPlayerData() async {
+    final response = await _getDataRequest(path: ApiPath.playerData);
+    // data is nested in a list
+    final data = json.decode(response.body) as List;
+    return data[0] as Map<String, dynamic>;
+  }
 
   Future<SpeakerStatus> getStatus() async {
-    var response = await _client.get(
-      _getDataUri.replace(
-        queryParameters: {
-          'path': 'settings:/kef/host/speakerStatus',
-          'roles': 'value',
-        },
-      ),
-    );
-
-    return toSpeakerStatus(jsonDecode(response.body)[0]['kefSpeakerStatus']);
+    final response = await _getDataRequest(path: ApiPath.speakerStatus);
+    final String data = json.decode(response.body)[0]['kefSpeakerStatus'];
+    return toSpeakerStatus(data);
   }
 
-  // doesn't work
-  Future<bool> setStatus(SpeakerStatus status) async {
-    final params = {
-      'path': 'settings:/kef/play/physicalSource',
-      'roles': 'value',
-      'value':
-          '{"type":"kefSpeakerStatus","kefSpeakerStatus":"${status.name()}"}',
-    };
-
-    var response = await _client.get(
-      _getDataUri.replace(queryParameters: params),
+  /// Send a [SpeakerStatus] command to the `settings:/kef/host/speakerStatus`
+  /// path
+  Future<void> setStatus(SpeakerStatus status) {
+    return _setDataRequest(
+      path: ApiPath.speakerStatus,
+      value: json.encode({
+        'type': 'kefSpeakerStatus',
+        'kefSpeakerStatus': status.name(),
+      }),
     );
-
-    if (response.statusCode != 200) {
-      return false;
-    }
-
-    return true;
   }
 
+  /// Get the [SpeakerSource]
   Future<SpeakerSource> getSource() async {
-    var response = await _client.get(
-      _getDataUri.replace(
-        queryParameters: {
-          'path': 'settings:/kef/play/physicalSource',
-          'roles': 'value',
-        },
-      ),
-    );
-
-    return toSpeakerSource(jsonDecode(response.body)[0]['kefPhysicalSource']);
+    final response = await _getDataRequest(path: ApiPath.speakerSource);
+    final String data = json.decode(response.body)[0]['kefPhysicalSource'];
+    return toSpeakerSource(data);
   }
 
-  Future<bool> setSource(SpeakerSource source) async {
-    final params = {
-      'path': 'settings:/kef/play/physicalSource',
-      'roles': 'value',
-      'value':
-          '{"type":"kefPhysicalSource","kefPhysicalSource":"${source.name()}"}',
-    };
-    var response = await _client.get(
-      _setDataUri.replace(queryParameters: params),
+  /// Set the [SpeakerSource]
+  Future<void> setSource(SpeakerSource source) async {
+    return _setDataRequest(
+      path: ApiPath.speakerSource,
+      value: json.encode({
+        'type': 'kefPhysicalSource',
+        'kefPhysicalSource': source.name(),
+      }),
     );
-
-    if (response.statusCode != 200) {
-      return false;
-    } else {
-      return true;
-    }
   }
 
+  /// Get the volume level
   Future<int> getVolume() async {
-    final params = {
-      'path': 'player:volume',
-      'roles': 'value',
-    };
-    var response = await _client.get(
-      _getDataUri.replace(queryParameters: params),
-    );
-
-    return jsonDecode(response.body)[0]['i32_'] as int;
+    final response = await _getDataRequest(path: ApiPath.volume);
+    return json.decode(response.body)[0]['i32_'] as int;
   }
 
-  Future<bool> setVolume(int volume) async {
-    final params = {
-      'path': 'player:volume',
-      'roles': 'value',
-      'value': '{"type":"i32_","i32_":$volume}',
-    };
-    final response = await _client.get(
-      _setDataUri.replace(queryParameters: params),
+  /// Set the volume level.
+  ///
+  /// [volume] must be between 0 and 100
+  Future<void> setVolume(int volume) async {
+    assert(0 <= volume && volume <= 100, 'Volume has to be between 0 and 100');
+    await _setDataRequest(
+      path: ApiPath.volume,
+      value: '{"type":"i32_","i32_":$volume}',
     );
-
-    if (response.statusCode != 200) {
-      return false;
-    } else {
-      return true;
-    }
   }
 
-  Future<PlayerData> getPlayerData() async {
-    final params = {
-      'path': 'player:player/data',
-      'roles': 'value',
-    };
-
-    final response = await _client.get(
-      _getDataUri.replace(queryParameters: params),
-    );
-
-    final json = jsonDecode(response.body)[0] as Map<String, dynamic>;
-
-    // dispatch the json. This may be done with the `status` field
-    if (json.length > 5) {
-      return ActivePlayerData.fromJson(json);
-    } else {
-      return InactivePlayerData.fromJson(json);
-    }
-  }
-
+  /// Get the current song playtime
   Future<int> getSongPlaytime() async {
-    final params = {
-      'path': 'player:player/data/playTime',
-      'roles': 'value',
-    };
-
-    final response = await _client.get(
-      _getDataUri.replace(queryParameters: params),
-    );
-
-    return jsonDecode(response.body)[0]['i64_'] as int;
+    final response = await _getDataRequest(path: ApiPath.playTime);
+    return json.decode(response.body)[0]['i64_'] as int;
   }
 
-  Future<bool> _playerControl(PlayerControl control) async {
-    final params = {
-      'path': 'player:player/control',
-      'roles': 'activate',
-      'value': '{"control":"${control.name()}"}',
-    };
-
-    final response = await _client.get(
-      _setDataUri.replace(queryParameters: params),
+  /// Send a [PlayerControl] command to the `player:player/control` path
+  Future<void> controlPlayer(PlayerControl control) async {
+    await _setDataRequest(
+      path: 'player:player/control',
+      value: '{"control":"${control.name()}"}',
+      roles: 'activate',
     );
+  }
 
-    if (response.statusCode != 200) {
-      return false;
-    } else {
-      return true;
+  /// Modyfies the default [_getDataUri] with [path] and [roles] and calls
+  /// [_makeRequest] to do the request.
+  Future<Response> _getDataRequest({
+    required String path,
+    String roles = 'value',
+  }) {
+    final queryParameters = {
+      'path': path,
+      'roles': roles,
+    };
+    final uri = _getDataUri.replace(queryParameters: queryParameters);
+    return _makeRequest(uri);
+  }
+
+  /// Modyfies the default [_setDataUri] with [path], [value] and [roles]
+  /// parameters and calls [_makeRequest] to do the request.
+  Future<void> _setDataRequest({
+    required String path,
+    required String value,
+    String roles = 'value',
+  }) {
+    final queryParameters = {
+      'path': path,
+      'roles': roles,
+      'value': value,
+    };
+    final uri = _setDataUri.replace(queryParameters: queryParameters);
+    return _makeRequest(uri);
+  }
+
+  /// Make a HTTP GET request to the given uri and throw a [HttpException] in
+  /// case of a status code >= 300
+  Future<Response> _makeRequest(Uri uri) async {
+    final response = await _client.get(uri);
+    if (response.statusCode >= 300) {
+      throw HttpException(response.body, uri: uri);
     }
+    return response;
   }
-
-  Future<bool> nextTrack() => _playerControl(PlayerControl.next);
-  Future<bool> togglePlayPause() => _playerControl(PlayerControl.pause);
-  Future<bool> previousTrack() => _playerControl(PlayerControl.previous);
 }

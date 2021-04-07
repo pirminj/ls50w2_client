@@ -17,7 +17,7 @@ enum SpeakerSource {
 
 /// Controls for the music player
 enum PlayerControl {
-  pause,
+  pause, // play/pause toggle
   next,
   previous,
 }

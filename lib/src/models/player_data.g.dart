@@ -48,12 +48,46 @@ Map<String, dynamic> _$_PlayIdToJson(_PlayId instance) => <String, dynamic>{
       'systemMemberId': instance.systemMemberId,
     };
 
+_MetaData _$_MetaDataFromJson(Map<String, dynamic> json) {
+  return _MetaData(
+    json['album'] as String,
+    json['albumArtist'] as String,
+    json['artist'] as String,
+    json['composer'] as String,
+    json['externalAppName'] as String,
+    json['originalTrackNumber'] as int,
+    json['serviceNameOverride'] as String,
+  );
+}
+
+Map<String, dynamic> _$_MetaDataToJson(_MetaData instance) => <String, dynamic>{
+      'serviceNameOverride': instance.serviceNameOverride,
+      'artist': instance.artist,
+      'album': instance.album,
+      'albumArtist': instance.albumArtist,
+      'externalAppName': instance.externalAppName,
+      'composer': instance.composer,
+      'originalTrackNumber': instance.originalTrackNumber,
+    };
+
+_MediaData _$_MediaDataFromJson(Map<String, dynamic> json) {
+  return _MediaData(
+    _MetaData.fromJson(json['metaData'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$_MediaDataToJson(_MediaData instance) =>
+    <String, dynamic>{
+      'metaData': instance.metaData.toJson(),
+    };
+
 _TrackRoles _$_TrackRolesFromJson(Map<String, dynamic> json) {
   return _TrackRoles(
     json['title'] as String,
     json['audioType'] as String,
     json['icon'] as String,
     json['description'] as String,
+    _MediaData.fromJson(json['mediaData'] as Map<String, dynamic>),
   );
 }
 
@@ -63,6 +97,7 @@ Map<String, dynamic> _$_TrackRolesToJson(_TrackRoles instance) =>
       'audioType': instance.audioType,
       'icon': instance.icon,
       'description': instance.description,
+      'mediaData': instance.mediaData.toJson(),
     };
 
 _MediaRoles _$_MediaRolesFromJson(Map<String, dynamic> json) {
@@ -140,6 +175,7 @@ K _$enumDecode<K, V>(
 const _$PlayerStateEnumMap = {
   PlayerState.playing: 'playing',
   PlayerState.paused: 'paused',
+  PlayerState.transitioning: 'transitioning',
   PlayerState.stopped: 'stopped',
 };
 

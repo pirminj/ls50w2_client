@@ -67,20 +67,60 @@ class _PlayId {
 }
 
 @JsonSerializable()
+class _MetaData {
+  _MetaData(
+    this.album,
+    this.albumArtist,
+    this.artist,
+    this.composer,
+    this.externalAppName,
+    this.originalTrackNumber,
+    this.serviceNameOverride,
+  );
+
+  String serviceNameOverride;
+  String artist;
+  String album;
+  String albumArtist;
+  String externalAppName;
+  String composer;
+  int originalTrackNumber;
+
+  factory _MetaData.fromJson(Map<String, dynamic> json) =>
+      _$_MetaDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$_MetaDataToJson(this);
+}
+
+@JsonSerializable()
+class _MediaData {
+  _MediaData(
+    this.metaData,
+  );
+
+  _MetaData metaData;
+
+  factory _MediaData.fromJson(Map<String, dynamic> json) =>
+      _$_MediaDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$_MediaDataToJson(this);
+}
+
+@JsonSerializable()
 class _TrackRoles {
   _TrackRoles(
     this.title,
     this.audioType,
     this.icon,
     this.description,
+    this.mediaData,
   );
 
-  // TODO: mediaData for more info
-  // _MetaData
   String title;
   String audioType;
   String icon;
   String description;
+  _MediaData mediaData;
 
   factory _TrackRoles.fromJson(Map<String, dynamic> json) =>
       _$_TrackRolesFromJson(json);
@@ -118,7 +158,9 @@ class _MediaRoles {
   Map<String, dynamic> toJson() => _$_MediaRolesToJson(this);
 }
 
-abstract class PlayerData {}
+abstract class PlayerData {
+  abstract PlayerState state;
+}
 
 @JsonSerializable()
 class ActivePlayerData implements PlayerData {
@@ -137,6 +179,7 @@ class ActivePlayerData implements PlayerData {
   _TrackRoles trackRoles;
   _MediaRoles mediaRoles;
 
+  @override
   PlayerState state;
 
   factory ActivePlayerData.fromJson(Map<String, dynamic> json) =>
@@ -159,6 +202,8 @@ class InactivePlayerData implements PlayerData {
   String error;
   Map error2;
   bool keepActive;
+
+  @override
   PlayerState state;
 
   factory InactivePlayerData.fromJson(Map<String, dynamic> json) =>
