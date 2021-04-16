@@ -2,7 +2,7 @@ Connect to and control your KEF LS50 Wireless 2 from Dart and Flutter
 
 > For now, this package is just an experiment and under heavy development. Feel free to discuss and contribute!
 
-> Heavily inspired by [pykefcontrol](https://github.com/rodupont/pykefcontrol), since there's now official API from KEF (yet ✌)
+> Heavily inspired by [pykefcontrol](https://github.com/rodupont/pykefcontrol) and this post in the [Roon community forum](https://community.roonlabs.com/t/ls50-wireless-ii-home-automation/154388/11?u=pirminj), since there's now official API from KEF (yet ✌)
 
 ## Usage
 

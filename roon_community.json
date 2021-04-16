@@ -1,0 +1,864 @@
+[
+    {
+        "id": "ac6f2947.90c7c8",
+        "type": "tab",
+        "label": "KEF",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ed802f56.41cfa",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "Kef LS50W2 OPTICAL",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/play/physicalSource\",\"roles\":\"value\",\"value\":{\"kefPhysicalSource\":\"optical\",\"type\":\"kefPhysicalSource\"}}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 180,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "519a06c1.b4b7b8",
+        "type": "http request",
+        "z": "ac6f2947.90c7c8",
+        "name": "kef",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "192.168.1.227/api/setData",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "25684655.89d16a"
+            ]
+        ]
+    },
+    {
+        "id": "5ea5dbc6.20b2b4",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "Kef LS50W2 AUX",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/play/physicalSource\",\"roles\":\"value\",\"value\":{\"kefPhysicalSource\":\"analog\",\"type\":\"kefPhysicalSource\"}}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "25684655.89d16a",
+        "type": "debug",
+        "z": "ac6f2947.90c7c8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a32f07b2.222088",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "Kef LS50W2 COAXIAL",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/play/physicalSource\",\"roles\":\"value\",\"value\":{\"kefPhysicalSource\":\"coaxial\",\"type\":\"kefPhysicalSource\"}}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 220,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "c5d5a287.5f6b3",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "Kef LS50W2 TV/HDMI",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/play/physicalSource\",\"roles\":\"value\",\"value\":{\"kefPhysicalSource\":\"tv\",\"type\":\"kefPhysicalSource\"}}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 260,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "fb61fb3b.3b7888",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "Kef LS50W2 BTOOTH",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/play/physicalSource\",\"roles\":\"value\",\"value\":{\"kefPhysicalSource\":\"bluetooth\",\"type\":\"kefPhysicalSource\"}}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 300,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "a1fa2a51.0847b8",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "Kef LS50W2 WIFI",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/play/physicalSource\",\"roles\":\"value\",\"value\":{\"kefPhysicalSource\":\"wifi\",\"type\":\"kefPhysicalSource\"}}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "9fcdb489.e1dfc8",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "BassExtention Less",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/bassExtension\",\"roles\":\"value\",\"value\":{\"kefBassExtension\":\"less\",\"type\":\"kefBassExtension\"}}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "789719fc.d65648",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "BassExtention Standard",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/bassExtension\",\"roles\":\"value\",\"value\":{\"kefBassExtension\":\"standard\",\"type\":\"kefBassExtension\"}}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 420,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "c42a4226.d5d87",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "BassExtention Extra",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/bassExtension\",\"roles\":\"value\",\"value\":{\"kefBassExtension\":\"extra\",\"type\":\"kefBassExtension\"}}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "b2bb1f9f.1c616",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "DeskModeOn",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/deskMode\",\"roles\":\"value\",\"value\":{\"bool_\":true,\"type\":\"bool_\"}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "26339462.00f7ec",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "DeskModeOff",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/deskMode\",\"roles\":\"value\",\"value\":{\"bool_\":false,\"type\":\"bool_\"}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "75c02954.59ec08",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "WallModeOn",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/wallMode\",\"roles\":\"value\",\"value\":{\"bool_\":true,\"type\":\"bool_\"}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 600,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "feafec8b.b53e1",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "WallModeOff",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/wallMode\",\"roles\":\"value\",\"value\":{\"bool_\":false,\"type\":\"bool_\"}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 640,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "ecee2a6c.8368a8",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "phaseCorrectionOn",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/phaseCorrection\",\"roles\":\"value\",\"value\":{\"bool_\":true,\"type\":\"bool_\"}}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "d2ca5f62.30f89",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "phaseCorrectionOn",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/phaseCorrection\",\"roles\":\"value\",\"value\":{\"bool_\":false,\"type\":\"bool_\"}}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 740,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "5f79fa32.f02534",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "highPassModeOn",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/highPassMode\",\"roles\":\"value\",\"value\":{\"bool_\":true,\"type\":\"bool_\"}}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 780,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "273a6643.87d9ba",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "highPassModeOff",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/highPassMode\",\"roles\":\"value\",\"value\":{\"bool_\":false,\"type\":\"bool_\"}}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 820,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "8609defe.fceb5",
+        "type": "comment",
+        "z": "ac6f2947.90c7c8",
+        "name": "Placeholder",
+        "info": "{\"subscribe\":[{\"path\":\"playlists:pq/getitems\",\"type\":\"rows\"},{\"path\":\"notifications:/display/queue\",\"type\":\"rows\"},{\"path\":\"settings:/mediaPlayer/playMode\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/wallMode\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/host/volumeLimit\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/highPassMode\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/host/speakerStatus\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/deskMode\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/host/volumeStep\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/balance\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/host/maximumVolume\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/bassExtension\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/highPassModeFreq\",\"type\":\"itemWithValue\"},{\"path\":\"kef:fwupgrade/info\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/subwooferGain\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/mediaPlayer/mute\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/wallModeSetting\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/subwooferPolarity\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/deskModeSetting\",\"type\":\"itemWithValue\"},{\"path\":\"player:volume\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/trebleAmount\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/phaseCorrection\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/play/physicalSource\",\"type\":\"itemWithValue\"},{\"path\":\"player:player/data/playTime\",\"type\":\"itemWithValue\"},{\"path\":\"settings:/kef/dsp/subOutLPFreq\",\"type\":\"itemWithValue\"},{\"path\":\"player:player/data\",\"type\":\"item\"}],\"unsubscribe\":[]}",
+        "x": 700,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "946cf5f.8fb7308",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "SubwooferPolarityNormal",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/subwooferPolarity\",\"roles\":\"value\",\"value\":{\"kefSubwooferPolarity\":\"normal\",\"type\":\"kefSubwooferPolarity\"}}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 860,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "aafefc22.65bd8",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "SubwooferPolarityInverted",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/dsp/subwooferPolarity\",\"roles\":\"value\",\"value\":{\"kefSubwooferPolarity\":\"inverted\",\"type\":\"kefSubwooferPolarity\"}}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 900,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "17843604.24093a",
+        "type": "comment",
+        "z": "ac6f2947.90c7c8",
+        "name": "Hipassmode with value",
+        "info": "{\"path\":\"settings:/kef/dsp/highPassModeFreq\",\"roles\":\"value\",\"value\":{\"i16_\":5,\"type\":\"i16_\"}}",
+        "x": 720,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "7ce1b878.661b38",
+        "type": "comment",
+        "z": "ac6f2947.90c7c8",
+        "name": "suboutfreqvalue",
+        "info": "{\"path\":\"settings:/kef/dsp/subOutLPFreq\",\"roles\":\"value\",\"value\":{\"i16_\":10,\"type\":\"i16_\"}}",
+        "x": 700,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "5d25cb8a.343004",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "Kef LS50W2 STANDBY",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"path\":\"settings:/kef/play/physicalSource\",\"roles\":\"value\",\"value\":{\"kefPhysicalSource\":\"standby\",\"type\":\"kefPhysicalSource\"}}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "519a06c1.b4b7b8"
+            ]
+        ]
+    },
+    {
+        "id": "1d4d7734.845689",
+        "type": "comment",
+        "z": "ac6f2947.90c7c8",
+        "name": "replace kef with name of your speaker in all json strings",
+        "info": "{\"path\":\"settings:/**kef**",
+        "x": 780,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "f3e89ba9.0bfef8",
+        "type": "castv2-sender",
+        "z": "ac6f2947.90c7c8",
+        "name": "Kef_Chromecast",
+        "connection": "922d6530.f17e48",
+        "x": 890,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "da233391.bcf55",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"type\":\"MUTE\"}",
+        "payloadType": "json",
+        "x": 620,
+        "y": 40,
+        "wires": [
+            [
+                "f3e89ba9.0bfef8"
+            ]
+        ]
+    },
+    {
+        "id": "a07c2532.1198d8",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"type\":\"UNMUTE\"}",
+        "payloadType": "json",
+        "x": 630,
+        "y": 80,
+        "wires": [
+            [
+                "f3e89ba9.0bfef8"
+            ]
+        ]
+    },
+    {
+        "id": "6f59fdfc.babd74",
+        "type": "inject",
+        "z": "ac6f2947.90c7c8",
+        "name": "vol 10%",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"type\":\"VOLUME\", \"volume\": 10}",
+        "payloadType": "json",
+        "x": 590,
+        "y": 140,
+        "wires": [
+            [
+                "f3e89ba9.0bfef8"
+            ]
+        ]
+    },
+    {
+        "id": "922d6530.f17e48",
+        "type": "castv2-connection",
+        "name": "Kef_Chromecast",
+        "target": "",
+        "host": "192.168.1.227",
+        "port": "8009"
+    },
+    {
+        "subscribe": [
+            {
+                "path": "playlists:pq/getitems",
+                "type": "rows"
+            },
+            {
+                "path": "notifications:/display/queue",
+                "type": "rows"
+            },
+            {
+                "path": "settings:/mediaPlayer/playMode",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/wallMode",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/host/volumeLimit",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/highPassMode",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/host/speakerStatus",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/deskMode",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/host/volumeStep",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/balance",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/host/maximumVolume",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/bassExtension",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/highPassModeFreq",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "kef:fwupgrade/info",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/subwooferGain",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/mediaPlayer/mute",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/wallModeSetting",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/subwooferPolarity",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/deskModeSetting",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "player:volume",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/trebleAmount",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/phaseCorrection",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/play/physicalSource",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "player:player/data/playTime",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/subOutLPFreq",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "player:player/data",
+                "type": "item"
+            }
+        ],
+        "unsubscribe": []
+    }
+]
