@@ -22,22 +22,42 @@ enum PlayerControl {
   previous,
 }
 
+enum BassExtension {
+  less,
+  standard,
+  extra,
+}
+
+enum MasterChannelMode {
+  left,
+  right,
+}
+
 extension ConvertSpeakerStatus on SpeakerStatus {
-  String name() => toString().split('.').last;
+  String get name => toString().split('.').last;
 }
 
 extension ConvertSpeakerSource on SpeakerSource {
-  String name() => toString().split('.').last;
+  String get name => toString().split('.').last;
 }
 
 extension ConvertPlayerControl on PlayerControl {
-  String name() => toString().split('.').last;
+  String get name => toString().split('.').last;
 }
 
-SpeakerStatus toSpeakerStatus(String string) => SpeakerStatus.values
-    .where((element) => element.toString().contains(string))
-    .single;
+extension ConvertBassExtension on BassExtension {
+  String get name => toString().split('.').last;
+}
 
-SpeakerSource toSpeakerSource(String string) => SpeakerSource.values
-    .where((element) => element.toString().contains(string))
-    .single;
+/// Helper function to get enum values from a string.
+///
+/// Returns a function which takes a string and returns one corresponding enum
+/// value from [options]
+///
+/// ```
+/// enumFromString(SpeakerSource.values)('wifi') // returns SpeakerSource.wifi
+/// ```
+T Function(String) enumFromString<T>(List<T> options) =>
+    (string) => options.singleWhere(
+          (option) => option.toString().contains(string),
+        );

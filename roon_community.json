@@ -860,5 +860,114 @@
             }
         ],
         "unsubscribe": []
+    },
+    {
+        "subscribe": [
+            {
+                "path": "playlists:pq/getitems",
+                "type": "rows"
+            },
+            {
+                "path": "notifications:/display/queue",
+                "type": "rows"
+            },
+            {
+                "path": "settings:/mediaPlayer/playMode",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/wallMode",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/host/volumeLimit",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/highPassMode",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/host/speakerStatus",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/deskMode",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/host/volumeStep",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/balance",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/host/maximumVolume",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/bassExtension",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/highPassModeFreq",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "kef:fwupgrade/info",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/subwooferGain",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/mediaPlayer/mute",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/wallModeSetting",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/subwooferPolarity",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/deskModeSetting",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "player:volume",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/trebleAmount",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/phaseCorrection",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/play/physicalSource",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "player:player/data/playTime",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "settings:/kef/dsp/subOutLPFreq",
+                "type": "itemWithValue"
+            },
+            {
+                "path": "player:player/data",
+                "type": "item"
+            }
+        ],
+        "unsubscribe": []
     }
 ]
