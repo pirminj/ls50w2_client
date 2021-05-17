@@ -164,7 +164,7 @@ class KefClient {
     'i16_',
   );
 
-  /// Value for treble adjustment between  (-3 dB) and  (+3 dB)
+  /// Value for treble adjustment between 0 (-3 dB) and 16 (+3 dB)
   late final ValueEndpoint<int> trebleTrim = ValueEndpoint(
     this,
     'settings:/kef/dsp/trebleAmount',

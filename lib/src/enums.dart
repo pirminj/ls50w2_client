@@ -38,7 +38,24 @@ extension ConvertSpeakerStatus on SpeakerStatus {
 }
 
 extension ConvertSpeakerSource on SpeakerSource {
-  String get name => toString().split('.').last;
+  String get name {
+    switch (this) {
+      case SpeakerSource.standby:
+        return 'Standby';
+      case SpeakerSource.wifi:
+        return 'Wi-Fi';
+      case SpeakerSource.bluetooth:
+        return 'Bluetooth';
+      case SpeakerSource.tv:
+        return 'TV';
+      case SpeakerSource.optic:
+        return 'Optical';
+      case SpeakerSource.coaxial:
+        return 'COAX';
+      case SpeakerSource.analog:
+        return 'AUX';
+    }
+  }
 }
 
 extension ConvertPlayerControl on PlayerControl {
